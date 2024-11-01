@@ -41,3 +41,7 @@ div.card{
 .none-float {
     float: none !important;
 }
+
+.bresult{
+    display: none;
+}

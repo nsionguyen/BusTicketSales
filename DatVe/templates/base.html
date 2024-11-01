@@ -64,7 +64,7 @@
             <div><input type="date" class="form-control"></div>
         </div>
         <div class="col-md-2 d-flex align-items-end">
-            <button class="btn btn-danger w-100 btn1">Tìm chuyến xe</button>
+            <button class="btn btn-danger w-100 btn1" onclick="showResult()">Tìm chuyến xe</button>
         </div>
     </div>
 </div>
@@ -109,7 +109,7 @@
         <button class="btn btn-secondary mt-3 btn1">Lọc chuyến xe</button>
     </div>
 </div>
-<div class="container my-4">
+<div class="bresult container my-4">
     <h5>Kết quả:</h5>
     <div class="card">
         <div class="card-body">
@@ -154,6 +154,7 @@
             <button class="btn btn-danger mt-3 btn1 none-float">Đặt vé</button>
         </div>
     </div>
+</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -164,4 +165,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/style.js') }}"></script>
 </html>
