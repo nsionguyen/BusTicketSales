@@ -25,6 +25,10 @@ def tt_ca_nhan():
 def tt_lien_he():
     return  render_template("ThongTinLienHe.html")
 
+@app.route('/lichtrinh')
+def lich_trinh():
+    return render_template("lichtrinh.html")
+
 bills = [
     {
         "trip_name": "Hanoi - Ho Chi Minh",
