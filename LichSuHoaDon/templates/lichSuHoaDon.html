@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill History</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Lịch sử đặt vé</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Tên phiếu</th>
+                    <th>Số vé</th>
+                    <th>Tên chuyến xe</th>
+                    <th>Thời điểm đi</th>
+                    <th>Ngày lập</th>
+                    <th>Giá</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                Danh sách hóa đơn
+                    <tr>
+                        <td>HCM-VT01</td>
+                        <td>8386</td>
+                        <td>Hồ Chí Minh - Vũng Tàu</td>
+                        <td>2024-10-10</td>
+                        <td>2024-10-05</td>
+                        <td>150.000 VNĐ</td>
+                        <td>Đã thanh toán</td>
+                        <td>
+                                <a href="{{ url_for('cancel_bill', bill_id=loop.index0) }}" class="btn btn-danger btn-sm">Cancel</a>
+                                <span class="text-muted"></span>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
