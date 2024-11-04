@@ -1,6 +1,8 @@
 from flask import Flask, url_for, render_template, redirect
-app=Flask(__name__)
+from main import login_blueprint
 
+app=Flask(__name__)
+app.register_blueprint(login_blueprint)
 @app.route('/datve')
 def index():
     return render_template("datve.html")
@@ -55,6 +57,7 @@ def bill_history():
 def cancel_bill(bill_id):
     # Logic to cancel bill here, updating the status and database as needed
     return redirect(url_for('bill_history'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
