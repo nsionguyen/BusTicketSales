@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill History</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Lịch sử đặt vé</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tên chuyến xe</th>
+                    <th>Thời điểm đi</th>
+                    <th>Ngày lập</th>
+                    <th>Giá</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bill in bills %}
+                <tr>
+                    <td>{{ loop.index0 + 1 }}</td>
+                    <td>{{ bill.trip_name }}</td>
+                    <td>{{ bill.departure_time }}</td>
+                    <td>{{ bill.booking_time }}</td>
+                    <td>{{ bill.total_amount }} VNĐ</td>
+                    <td>{{ bill.status }}</td>
+                    <td>
+                        {% if bill.cancelable %}
+                            <a href="{{ url_for('cancel_bill', bill_id=loop.index0) }}" class="btn btn-danger btn-sm">Hủy</a>
+                        {% else %}
+                            <span class="text-muted">Không thể hủy</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

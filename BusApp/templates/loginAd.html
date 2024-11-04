@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập</title>
-    <!-- Link đến style.css trong thư mục static -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Link đến datve.css trong thư mục static -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loginad.css') }}">
   <script>
     function randomBackground() {
         const colors = [
@@ -55,7 +55,7 @@
             {% endwith %}
         </div>
         <div class="login-image">
-            <img src="{{ url_for('static', filename='login_image.jpg') }}" alt="Login Illustration">
+            <img src="{{ url_for('static', filename='data/login_image.jpg') }}" alt="Login Illustration">
         </div>
     </div>
 </body>
