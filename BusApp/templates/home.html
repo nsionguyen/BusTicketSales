@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Bus - Bán vé xe</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/homestyle.css') }}"/>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/home.css') }}">
+    <script src="{{ url_for('static', filename = 'js/home.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -43,22 +45,24 @@
     </section>
 
     <!-- Tìm Chuyến Xe -->
+
+
     <section class="search-trip">
         <form>
-            <div>
-                <label for="departure">Điểm đi</label>
-                <select id="departure" name="departure">
-                    <option>Chọn địa điểm</option>
-                    <!-- Thêm các địa điểm khác -->
-                </select>
-            </div>
-            <div>
-                <label for="destination">Điểm đến</label>
-                <select id="destination" name="destination">
-                    <option>Chọn địa điểm</option>
-                    <!-- Thêm các địa điểm khác -->
-                </select>
-            </div>
+            <div>  
+                <label for="departure">Điểm đi</label>  
+                <select id="departure" name="departure">  
+                    <option value="" disabled selected>Chọn tỉnh thành</option>  
+                    <!-- Thêm các địa điểm khác -->  
+                </select>  
+            </div>  
+            <div>  
+                <label for="destination">Điểm đến</label>  
+                <select id="destination" name="destination">  
+                    <option value="" disabled selected>Chọn tỉnh thành</option>  
+                    <!-- Thêm các địa điểm khác -->  
+                </select>  
+            </div>  
             <div>
                 <label for="departure-date">Ngày đi</label>
                 <input type="date" id="departure-date" name="departure-date">
@@ -104,28 +108,14 @@
     <p>Gợi ý những tuyến xe được đặt nhiều</p>
     <div class="route-list">
         <div class="route-item">
-            <img src="./static/data/saigon.jpg" alt="Cần Thơ ⇨ Sài Gòn">
+            <img src="{{ url_for('static', filename = 'data/saigon.jpg') }}" alt="Cần Thơ ⇨ Sài Gòn">
             <div class="route-info">
                 <h3>Cần Thơ ⇨ Sài Gòn</h3>
                 <p>⏱ 4h | 📍 168km | 💰 150.000₫</p>
             </div>
         </div>
         <div class="route-item">
-            <img src="./static/data/saigon.jpg" alt="Cần Thơ ⇨ Sài Gòn">
-            <div class="route-info">
-                <h3>Cần Thơ ⇨ Sài Gòn</h3>
-                <p>⏱ 4h | 📍 168km | 💰 150.000₫</p>
-            </div>
-        </div>
-        <div class="route-item">
-            <img src="./static/data/saigon.jpg"" alt="Cần Thơ ⇨ Sài Gòn">
-            <div class="route-info">
-                <h3>Cần Thơ ⇨ Sài Gòn</h3>
-                <p>⏱ 4h | 📍 168km | 💰 150.000₫</p>
-            </div>
-        </div>
-        <div class="route-item">
-            <img src="./static/data/angiang.jpg" alt="Cần Thơ ⇨ An Giang">
+            <img src="{{ url_for('static', filename = 'data/angiang.jpg') }}" alt="Cần Thơ ⇨ An Giang">
             <div class="route-info">
                 <h3>Cần Thơ ⇨ An Giang</h3>
                 <p>⏱ 3h | 📍 62km | 💰 100.000₫</p>
@@ -135,5 +125,7 @@
     </div>
 </section>
 
+
 </body>
+<script src="/BusApp/static/js/home.js"></script>  
 </html>
