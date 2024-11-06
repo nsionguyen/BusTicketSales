@@ -23,6 +23,21 @@ def login_admin():
 def tt_ca_nhan():
     return render_template("ThongTinCaNhan.html")
 
+@app.route('/vecuatoi')
+def ve_cua_toi():
+    data = getVe()
+    return render_template("VeCuaToi.html", data = data)
+
+def getVe():
+    db_path = 'BusTicketSales/BusApp/data/database.db'
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    query = 'SELECT Ben_Xe_Di.ten_ben_xe, Ben_Xe_Den.ten_ben_xe, TuyenDuong.khoangCach, LichTrinh.thoiGianDi, Ve.trangThaiVe FROM Ve JOIN  DonHang ON Ve.idDonHang  = DonHang.idDonHang JOIN LichTrinh ON LichTrinh.idLichTrinh = DonHang.idLichTrinh JOIN TuyenDuong ON TuyenDuong.idTuyenDuong = LichTrinh.idTuyenDuong JOIN Ben_Xe AS Ben_Xe_Di ON TuyenDuong.diemDi = Ben_Xe_Di.ben_xe_id JOIN Ben_Xe AS Ben_Xe_Den ON TuyenDuong.diemDen = Ben_Xe_Den.ben_xe_id; '
+    cursor.execute(query)
+    data = cursor.fetchall()
+    return data
+
+
 @app.route('/ttlienhe')
 def tt_lien_he():
     return  render_template("ThongTinLienHe.html")
