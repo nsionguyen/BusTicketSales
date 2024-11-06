@@ -1,6 +1,6 @@
 from flask import Flask, url_for, render_template, redirect
 from main import login_blueprint
-
+import sqlite3
 app=Flask(__name__)
 app.register_blueprint(login_blueprint)
 @app.route('/datve')
@@ -29,7 +29,24 @@ def tt_lien_he():
 
 @app.route('/lichtrinh')
 def lich_trinh():
-    return render_template("lichtrinh.html")
+    data = getLichTrinh()
+    return render_template("lichtrinh.html", data = data)
+
+def getLichTrinh():
+    db_path = 'BusTicketSales/BusApp/data/database.db'
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    query = 'SELECT  BenXeDi.ten_ben_xe AS ten_diem_di, BenXeDen.ten_ben_xe AS ten_diem_den, TuyenDuong.khoangCach, LichTrinh.thoiGianDi FROM LichTrinh JOIN  TuyenDuong ON LichTrinh.idTuyenDuong = TuyenDuong.idTuyenDuong JOIN Ben_Xe AS BenXeDi ON TuyenDuong.diemDi = BenXeDi.ben_xe_id JOIN Ben_Xe AS BenXeDen ON TuyenDuong.diemDen = BenXeDen.ben_xe_id; '
+    cursor.execute(query)
+    data = cursor.fetchall()    
+    conn.close()
+    return data
+
+print("test")
+data = getLichTrinh()
+for i in data:
+    print(i)
+
 
 bills = [
     {
