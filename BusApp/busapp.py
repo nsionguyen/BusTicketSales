@@ -73,13 +73,15 @@ def getLichTrinh(diemDi = None, diemDen = None):
 app.secret_key = 'your_secret_key'
 # Đọc dữ liệu từ file JSON
 def load_users():
-    with open('BusTicketSales/BusApp/data/user.json', 'r') as file:
+    user_path = os.path.join(os.path.dirname(__file__), 'data/user.json')
+    with open(user_path, 'r') as file:
         data = json.load(file)
     return data['users']
 
 # Lưu dữ liệu vào file JSON
 def save_users(users):
-    with open('BusTicketSales/BusApp/data/user.json', 'w') as file:
+    user_path = os.path.join(os.path.dirname(__file__), 'data/user.json')
+    with open(user_path, 'w') as file:
         json.dump({"users": users}, file, indent=4)
 
 @app.route('/change-password', methods=['GET', 'POST'])
