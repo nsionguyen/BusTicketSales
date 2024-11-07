@@ -2,7 +2,11 @@ from flask import Flask, url_for, render_template, redirect, request, flash
 from main import login_blueprint
 from datve import datve_blueprints
 import sqlite3
+<<<<<<< HEAD
 import json
+=======
+
+>>>>>>> fc30bdf86e4809662570cf88a664d255fcb74f56
 app=Flask(__name__)
 app.register_blueprint(datve_blueprints)
 app.register_blueprint(login_blueprint)
@@ -38,6 +42,7 @@ def getVe():
     query = 'SELECT Ben_Xe_Di.ten_ben_xe, Ben_Xe_Den.ten_ben_xe, TuyenDuong.khoangCach, LichTrinh.thoiGianDi, Ve.trangThaiVe FROM Ve JOIN  DonHang ON Ve.idDonHang  = DonHang.idDonHang JOIN LichTrinh ON LichTrinh.idLichTrinh = DonHang.idLichTrinh JOIN TuyenDuong ON TuyenDuong.idTuyenDuong = LichTrinh.idTuyenDuong JOIN Ben_Xe AS Ben_Xe_Di ON TuyenDuong.diemDi = Ben_Xe_Di.ben_xe_id JOIN Ben_Xe AS Ben_Xe_Den ON TuyenDuong.diemDen = Ben_Xe_Den.ben_xe_id; '
     cursor.execute(query)
     data = cursor.fetchall()
+    conn.close()
     return data
 
 
@@ -56,7 +61,9 @@ def getLichTrinh(diemDi = None, diemDen = None):
     db_path = 'BusTicketSales/BusApp/data/database.db'
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    query = 'SELECT  BenXeDi.ten_ben_xe AS ten_diem_di, BenXeDen.ten_ben_xe AS ten_diem_den, TuyenDuong.khoangCach, LichTrinh.thoiGianDi FROM LichTrinh JOIN  TuyenDuong ON LichTrinh.idTuyenDuong = TuyenDuong.idTuyenDuong JOIN Ben_Xe AS BenXeDi ON TuyenDuong.diemDi = BenXeDi.ben_xe_id JOIN Ben_Xe AS BenXeDen ON TuyenDuong.diemDen = BenXeDen.ben_xe_id; '
+    query = ('SELECT  BenXeDi.ten_ben_xe AS ten_diem_di, BenXeDen.ten_ben_xe AS ten_diem_den, TuyenDuong.khoangCach, LichTrinh.thoiGianDi '
+             'FROM LichTrinh JOIN  TuyenDuong ON LichTrinh.idTuyenDuong = TuyenDuong.idTuyenDuong JOIN Ben_Xe AS BenXeDi ON TuyenDuong.diemDi = BenXeDi.ben_xe_id '
+             'JOIN Ben_Xe AS BenXeDen ON TuyenDuong.diemDen = BenXeDen.ben_xe_id; ')
     cursor.execute(query)
     data = cursor.fetchall()
     if diemDi != None:
