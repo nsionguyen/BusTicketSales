@@ -54,18 +54,6 @@ def get_location():
 def index():
     return render_template("datve.html")
 
-@datve_blueprints.route('/datve2')
-def index2():
-    diem_di = get_data_from_db("SELECT DISTINCT name FROM provinces")
-    diem_den = get_data_from_db("SELECT DISTINCT name FROM provinces")
-    quan_huyen_di = get_data_from_db("SELECT DISTINCT name FROM districts")
-    ben_di = get_data_from_db("SELECT DISTINCT ten_ben_xe FROM Ben_Xe")
-    quan_huyen_den = get_data_from_db("SELECT DISTINCT name FROM districts")
-    ben_den = get_data_from_db("SELECT DISTINCT ten_ben_xe FROM Ben_Xe")
-    return render_template("datve2.html",
-                           diem_di=diem_di,diem_den=diem_den,quan_huyen_di=quan_huyen_di,
-                           ben_di=ben_di,quan_huyen_den=quan_huyen_den, ben_den=ben_den)
-
 
 @datve_blueprints.route('/api/results')
 def get_results():

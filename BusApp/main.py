@@ -16,7 +16,7 @@ def login():
             return render_template("home.html")
         else:
             err_msg = "DANH NHAP THAT BAI"
-    return render_template("/dangnhap.html", err_msg=err_msg)
+    return render_template("dangnhap.html", err_msg=err_msg)
 
 # @login_blueprint.route("/")
 # def index():
