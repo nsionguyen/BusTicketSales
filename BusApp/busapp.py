@@ -1,12 +1,14 @@
 from flask import Flask, url_for, render_template, redirect
 from main import login_blueprint
+from datve import datve_blueprints
 
 app=Flask(__name__)
+app.register_blueprint(datve_blueprints)
 app.register_blueprint(login_blueprint)
-@app.route('/datve')
-def index():
-    return render_template("datve.html")
 
+@app.route('/thanhtoan')
+def thanh_toan():
+    return render_template("thanhtoan.html")
 @app.route('/')
 def trang_chu():
     return render_template("home.html")
