@@ -2,11 +2,8 @@ from flask import Flask, url_for, render_template, redirect, request, flash
 from main import login_blueprint
 from datve import datve_blueprints
 import sqlite3
-<<<<<<< HEAD
-import json
-=======
+import os
 
->>>>>>> fc30bdf86e4809662570cf88a664d255fcb74f56
 app=Flask(__name__)
 app.register_blueprint(datve_blueprints)
 app.register_blueprint(login_blueprint)
@@ -36,7 +33,7 @@ def ve_cua_toi():
     return render_template("VeCuaToi.html", data = data)
 
 def getVe():
-    db_path = 'BusTicketSales/BusApp/data/database.db'
+    db_path = os.path.join(os.path.dirname(__file__), 'data/database.db')
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     query = 'SELECT Ben_Xe_Di.ten_ben_xe, Ben_Xe_Den.ten_ben_xe, TuyenDuong.khoangCach, LichTrinh.thoiGianDi, Ve.trangThaiVe FROM Ve JOIN  DonHang ON Ve.idDonHang  = DonHang.idDonHang JOIN LichTrinh ON LichTrinh.idLichTrinh = DonHang.idLichTrinh JOIN TuyenDuong ON TuyenDuong.idTuyenDuong = LichTrinh.idTuyenDuong JOIN Ben_Xe AS Ben_Xe_Di ON TuyenDuong.diemDi = Ben_Xe_Di.ben_xe_id JOIN Ben_Xe AS Ben_Xe_Den ON TuyenDuong.diemDen = Ben_Xe_Den.ben_xe_id; '
@@ -58,12 +55,10 @@ def lich_trinh():
     return render_template("lichtrinh.html", data = data )
 
 def getLichTrinh(diemDi = None, diemDen = None):
-    db_path = 'BusTicketSales/BusApp/data/database.db'
+    db_path = os.path.join(os.path.dirname(__file__), 'data/database.db')
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    query = ('SELECT  BenXeDi.ten_ben_xe AS ten_diem_di, BenXeDen.ten_ben_xe AS ten_diem_den, TuyenDuong.khoangCach, LichTrinh.thoiGianDi '
-             'FROM LichTrinh JOIN  TuyenDuong ON LichTrinh.idTuyenDuong = TuyenDuong.idTuyenDuong JOIN Ben_Xe AS BenXeDi ON TuyenDuong.diemDi = BenXeDi.ben_xe_id '
-             'JOIN Ben_Xe AS BenXeDen ON TuyenDuong.diemDen = BenXeDen.ben_xe_id; ')
+    query = ('SELECT  BenXeDi.ten_ben_xe AS ten_diem_di, BenXeDen.ten_ben_xe AS ten_diem_den, TuyenDuong.khoangCach, LichTrinh.thoiGianDi ' 'FROM LichTrinh JOIN  TuyenDuong ON LichTrinh.idTuyenDuong = TuyenDuong.idTuyenDuong JOIN Ben_Xe AS BenXeDi ON TuyenDuong.diemDi = BenXeDi.ben_xe_id ' 'JOIN Ben_Xe AS BenXeDen ON TuyenDuong.diemDen = BenXeDen.ben_xe_id; ')
     cursor.execute(query)
     data = cursor.fetchall()
     if diemDi != None:
@@ -94,7 +89,7 @@ def change_password():
         old_password = request.form['old_password']
         new_password = request.form['new_password']
         confirm_password = request.form['confirm_password']
-        
+
         # Kiểm tra người dùng trong file JSON
         users = load_users()
         user_found = False
@@ -111,12 +106,12 @@ def change_password():
                 else:
                     flash('New password and confirm password do not match!', 'danger')
                 break
-        
+
         if not user_found:
             flash('Incorrect username or old password!', 'danger')
 
         return redirect(url_for('change_password'))
-    
+
     # Render trang HTML với form
     return render_template('change_password.html')
 
