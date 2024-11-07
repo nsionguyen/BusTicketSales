@@ -1,11 +1,8 @@
-from flask import Flask, url_for, render_template, redirect, request
+from flask import Flask, url_for, render_template, redirect, request, flash
 from main import login_blueprint
-<<<<<<< HEAD
 from datve import datve_blueprints
-
-=======
 import sqlite3
->>>>>>> 111d90b692ac2248b2d0a15a48c7956ebb4b69dc
+import json
 app=Flask(__name__)
 app.register_blueprint(datve_blueprints)
 app.register_blueprint(login_blueprint)
@@ -68,6 +65,53 @@ def getLichTrinh(diemDi = None, diemDen = None):
         data = [p for p in data if str(p[1]) == str(diemDen)]
     conn.close()
     return data
+
+
+app.secret_key = 'your_secret_key'
+# Đọc dữ liệu từ file JSON
+def load_users():
+    with open('BusTicketSales/BusApp/data/user.json', 'r') as file:
+        data = json.load(file)
+    return data['users']
+
+# Lưu dữ liệu vào file JSON
+def save_users(users):
+    with open('BusTicketSales/BusApp/data/user.json', 'w') as file:
+        json.dump({"users": users}, file, indent=4)
+
+@app.route('/change-password', methods=['GET', 'POST'])
+def change_password():
+    if request.method == 'POST':
+        # Lấy dữ liệu từ form
+        username = request.form['username']
+        old_password = request.form['old_password']
+        new_password = request.form['new_password']
+        confirm_password = request.form['confirm_password']
+        
+        # Kiểm tra người dùng trong file JSON
+        users = load_users()
+        user_found = False
+
+        for user in users:
+            if user['username'] == username and user['password'] == old_password:
+                user_found = True
+                # Kiểm tra mật khẩu mới và xác nhận mật khẩu có giống nhau không
+                if new_password == confirm_password:
+                    # Cập nhật mật khẩu mới
+                    user['password'] = new_password
+                    save_users(users)  # Lưu lại dữ liệu
+                    flash('Password changed successfully!', 'success')
+                else:
+                    flash('New password and confirm password do not match!', 'danger')
+                break
+        
+        if not user_found:
+            flash('Incorrect username or old password!', 'danger')
+
+        return redirect(url_for('change_password'))
+    
+    # Render trang HTML với form
+    return render_template('change_password.html')
 
 
 bills = [
