@@ -49,7 +49,7 @@ body {
 }
 
 .banner {
-background: url("{{ url_for('static', filename='data/banner.avif') }}") no-repeat center center / cover;    color: #333;
+        /*background: url("{{ url_for('static', filename='data/banner.avif') }}") no-repeat center center / cover;    color: #333;*/
     text-align: left;
     padding: 100px 20px;
 }
